@@ -1,4 +1,6 @@
 # Charting the Future: Harnessing LLMs for Quantitative Finance
+[![](https://github.com/charting-the-future/charting-the-future/actions/workflows/ci.yml/badge.svg)](https://github.com/charting-the-future/charting-the-future/actions/workflows/ci.yml) 
+![](https://img.shields.io/badge/python-3.13-blue.svg)
 
 Welcome to the companion repository for the book  
 **Charting the Future: Harnessing LLMs for Quantitative Finance** (Colin Alexander, CFA, CIPM).
