@@ -62,6 +62,15 @@ charting-the-future/
 │
 ├─ website/                      # (Optional) Static site for the project
 │
+├─ memory-bank/                  # Memory Bank for persistent AI development context
+│  ├─ projectbrief.md             # Foundation: mission, objectives, scope
+│  ├─ productContext.md           # Why: problem solving and value creation
+│  ├─ activeContext.md            # Current: focus, decisions, next steps
+│  ├─ systemPatterns.md           # How: architecture, patterns, implementations
+│  ├─ techContext.md              # With: technologies, tools, integrations
+│  ├─ progress.md                 # Status: completed work and roadmap
+│  └─ README.md                   # Memory Bank documentation and usage guide
+│
 ├─ .github/                      # GitHub configs, CI/CD, PR templates
 ├─ .gitignore                    # Gitignore file (Python template)
 ├─ CODE_OF_CONDUCT.md            # Contributor guidelines
@@ -120,6 +129,27 @@ agents → sector scores (1–5) → committee aggregation → long/short portfo
 
 ---
 
+## Memory Bank for AI Development
+
+This repository includes a **Memory Bank** in the `memory-bank/` directory, which enables persistent context and knowledge retention across AI development sessions. The Memory Bank transforms stateless coding assistants into a knowledgeable development partners that understands the project's architecture, decisions, and progress.
+
+### Benefits for Developers
+- **Persistent Context**: Maintains understanding of the multi-agent sector committee system
+- **Consistent Development**: Preserves coding standards and architectural patterns
+- **Self-Documenting**: Creates valuable project documentation automatically
+- **Scalable Knowledge**: Adapts to project evolution and complexity
+
+### Usage
+Start any coding agent conversation with:
+```
+follow your custom instructions
+```
+
+This loads the complete project context from the Memory Bank files.
+
+For complete documentation and setup instructions, see the [Memory Bank README](memory-bank/README.md). This methodology is model-agnostic and works with any AI coding assistant. For specific Cline implementation details, see the official [Cline Memory Bank documentation](https://docs.cline.bot/prompting/cline-memory-bank).
+---
+
 ## Research Summaries
 
 The `research/` folder contains structured 1–2 page summaries of key LLM + finance papers.  
@@ -161,4 +191,4 @@ See [SECURITY.md](SECURITY.md) for the security policy.
 
 If you use this repo in your research or teaching, please cite:
 
-> Alexander, C. (2025). *Charting the Future: Harnessing LLMs for Quantitative Finance*. Wiley (forthcoming).  
+> Alexander, C. (2025). *Charting the Future: Harnessing LLMs for Quantitative Finance*. Wiley (forthcoming).
