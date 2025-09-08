@@ -1,0 +1,10 @@
+[project]
+name = "charting-the-future"
+version = "0.1.0"
+description = "Companion repository for *Charting the Future: Harnessing LLMs for Quantitative Finance* — includes reproducible code examples, research paper summaries, and teaching materials on LLMs in quantitative finance."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "pytest>=8.4.2",
+    "ruff>=0.12.12",
+]
