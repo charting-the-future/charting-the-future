@@ -30,26 +30,33 @@ The Memory Bank is a structured documentation system that allows the coding agen
 
 ## File Structure
 
-This Memory Bank contains six core files organized in a hierarchical structure:
+This Memory Bank contains the core files plus detailed project specifications organized in a spec-driven development structure:
 
 ```
 memory-bank/
-├── projectbrief.md      # Foundation: mission, objectives, scope
-├── productContext.md    # Why: problem solving and value creation
-├── activeContext.md     # Current: focus, decisions, next steps
-├── systemPatterns.md    # How: architecture, patterns, implementations
-├── techContext.md       # With: technologies, tools, integrations
-└── progress.md          # Status: completed work and roadmap
+├── projectbrief.md           # Foundation: mission, objectives, scope
+├── productContext.md         # Why: problem solving and value creation
+├── activeContext.md          # Current: spec-driven two-phase development plan
+├── systemPatterns.md         # How: architecture, patterns, implementations
+├── techContext.md            # With: technologies, tools, integrations
+├── progress.md               # Status: completed work and implementation roadmap
+├── phase1-chapter6-spec.md   # Phase 1: Deep Research Scoring System specification
+└── phase2-chapter7-spec.md   # Phase 2: Portfolio Construction Pipeline specification
 ```
 
 ### Core Files Explained
 
 - **projectbrief.md** - The foundation document defining the multi-agent sector committee system for systematic investment decision-making
 - **productContext.md** - Explains the tri-pillar methodology and how it creates value for portfolio managers and risk teams
-- **activeContext.md** - Current development focus on integrating deep_research_runner.py into the sector-committee package
+- **activeContext.md** - Spec-driven two-phase development plan with clear chapter boundaries and implementation structure
 - **systemPatterns.md** - Architectural patterns including factory design, ETF mappings, and risk frameworks
 - **techContext.md** - Technical implementation details covering Python 3.13, OpenAI API, and compliance requirements
-- **progress.md** - Comprehensive status tracking and implementation roadmap
+- **progress.md** - Updated status tracking with spec-driven implementation roadmap and success gates
+
+### Project Specifications (Spec-Driven Development)
+
+- **phase1-chapter6-spec.md** - Complete specification for Chapter 6 Deep Research Scoring System with measurable acceptance criteria
+- **phase2-chapter7-spec.md** - Complete specification for Chapter 7 Portfolio Construction Pipeline with quantitative success metrics
 
 ## How to Use
 
@@ -68,14 +75,29 @@ Ask coding agent to "update memory bank" after significant progress or changes
 - **"update memory bank"** - Triggers comprehensive documentation review
 - **"initialize memory bank"** - Creates initial Memory Bank structure (already done)
 
+## Spec-Driven Development Methodology
+
+This Memory Bank implements a rigorous spec-driven development approach that ensures measurable deliverables and prevents scope creep:
+
+### Two-Phase Structure
+- **Phase 1 (Chapter 6)**: Deep Research Scoring System - Multi-agent analysis producing 1-5 sector scores
+- **Phase 2 (Chapter 7)**: Portfolio Construction Pipeline - Converting scores to beta-neutral ETF allocations
+
+### Success Criteria Framework
+- **100% Measurable Acceptance Criteria**: Every deliverable has quantitative, testable requirements
+- **Numerical Success Metrics**: KPIs with specific targets (e.g., <5 min latency, 95%+ reliability, |beta| < 0.1)
+- **Risk Mitigation Strategies**: Technical and operational risks identified with mitigation plans
+- **Sequential Dependencies**: Phase 2 cannot begin until Phase 1 meets all acceptance criteria
+
 ## Integration with Quantitative Finance Workflow
 
 This Memory Bank is specifically designed for the sophisticated multi-agent financial analysis system described in the book. It captures:
 
-- **Agent Architecture**: Factory patterns for OpenAI o4-mini and o3-deep-research models
-- **ETF Universe**: 11 SPDR sectors with inverse ETF mappings and leverage adjustments
-- **Risk Management**: Beta neutralization, concentration limits, and compliance requirements
-- **Portfolio Construction**: Score aggregation, tilt mapping, and execution workflows
+- **Agent Architecture**: Factory patterns for OpenAI o4-mini and o3-deep-research models with strict JSON schema enforcement
+- **ETF Universe**: 11 SPDR sectors with inverse ETF mappings and leverage adjustments for beta neutralization
+- **Risk Management**: Beta neutralization, concentration limits (30% per sector), and compliance requirements
+- **Portfolio Construction**: Score aggregation, tilt mapping {1,2,3,4,5} → {-2,-1,0,+1,+2}, and execution workflows
+- **Audit Trail**: Complete compliance documentation from LLM reasoning to tradeable positions
 
 ## Learn More
 

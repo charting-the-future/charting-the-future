@@ -13,6 +13,7 @@
 - **Architecture Documentation**: Factory patterns, JSON schemas, ETF mappings captured
 - **Technical Specifications**: OpenAI integration, audit logging, compliance requirements defined
 - **Product Context**: Tri-pillar methodology and value proposition documented
+- **Spec-Driven Structure**: Clear two-phase separation aligned with book chapters
 
 ### ✅ Core Algorithm Implementation
 - **Deep Research Runner**: Complete multi-model ensemble implementation provided
@@ -27,94 +28,101 @@
 - **Beta Hedge Options**: SPDN/SH for residual market exposure neutralization
 - **Operational Metadata**: Ticker symbols, leverage ratios, liquidity considerations
 
+### ✅ Spec-Driven Development Framework
+- **Phase 1 Specification**: Complete project spec for Chapter 6 (Deep Research Scoring)
+- **Phase 2 Specification**: Complete project spec for Chapter 7 (Portfolio Construction)
+- **Acceptance Criteria**: 100% measurable, testable deliverables defined
+- **Success Metrics**: Quantitative KPIs with numerical targets specified
+- **Risk Mitigation**: Technical and operational risk strategies documented
+
 ## Work in Progress
 
-### 🔄 Package Integration
-**Status**: Deep research implementation exists but not integrated into sector-committee package
-**Challenge**: Translating standalone script into production-ready Python package structure
-**Next Steps**: 
-- Create `sector_committee/__init__.py` with main exports
-- Implement `sector_committee/agents.py` using deep_research_runner patterns
-- Build portfolio construction and hedging modules
+### 🔄 Phase 1 Implementation (Chapter 6)
+**Status**: Spec-driven development plan complete, ready for implementation
+**Scope**: Multi-agent sector analysis producing 1-5 scores with audit trails
+**Dependencies**: Existing deep_research_runner.py patterns and OpenAI API access
+**Current Priority**: Package structure creation and core integration
 
-## Remaining Implementation
+### 🔄 Phase 2 Preparation (Chapter 7)
+**Status**: Detailed specification complete, awaiting Phase 1 completion
+**Scope**: Portfolio construction from sector scores to beta-neutral ETF allocations
+**Dependencies**: Phase 1 completion (requires working sector scores as input)
+**Preparation**: ETF mapping verification and risk parameter configuration
 
-### 📋 Core Package Development
+## Implementation Roadmap
 
-**1. Sector Committee Package Structure**
+### 📋 Phase 1: Chapter 6 Deep Research Scoring (Weeks 1-2)
+
+**Package Structure (spec-driven)**
 ```
-sector-committee/sector_committee/
-├── __init__.py           # Package exports and version
-├── agents.py             # Multi-agent orchestration 
-├── models.py             # Data models and schemas
-├── portfolio.py          # Score-to-position translation
-├── hedging.py            # Beta neutralization logic
-├── config.py             # ETF mappings and parameters
-└── utils.py              # Logging and audit utilities
-```
-
-**2. Configuration Management**
-- **ETF Mappings**: SECTOR_LONG_ETF and SECTOR_INVERSE dictionaries
-- **Risk Parameters**: Concentration limits, turnover bands, rebalance thresholds  
-- **Model Configs**: Provider settings, timeout parameters, retry logic
-- **Compliance Settings**: Audit requirements, logging formats
-
-**3. Portfolio Construction Pipeline**
-- **Score Aggregation**: Committee consensus from multiple agent outputs
-- **Tilt Mapping**: Convert 1-5 scores to -2 to +2 portfolio weights
-- **Gross Budget Scaling**: Normalize to 100% gross exposure target
-- **Concentration Controls**: 30% sector caps, correlation clustering limits
-- **Beta Neutralization**: Residual market exposure hedging
-
-**4. Testing Infrastructure**
-```
-sector-committee/tests/
-├── test_agents.py        # Agent execution and validation
-├── test_models.py        # Schema and data model tests
-├── test_portfolio.py     # Position sizing and constraints
-├── test_hedging.py       # Beta neutralization accuracy
-├── test_integration.py   # End-to-end pipeline tests
-└── fixtures/             # Sample data and mock responses
+sector_committee/scoring/
+├── __init__.py          # Exports: SectorAgent, SectorRating
+├── agents.py            # SectorAgent implementation
+├── models.py            # Data models and TypedDict definitions
+├── factory.py           # ModelFactory and ResearchClient interfaces
+├── ensemble.py          # EnsembleAggregator implementation
+├── schema.py            # JSON schema validation
+└── audit.py             # Audit trail logging utilities
 ```
 
-**5. Example Applications**
+**Core Deliverables**
+1. **D1**: SectorAgent with analyze_sector method (90%+ test coverage)
+2. **D2**: Data models with 100% JSON schema compliance
+3. **D3**: ModelFactory + EnsembleAggregator for multi-model consensus
+4. **D4**: Complete audit trail system for compliance
+5. **D5**: Integration tests validating all 11 SPDR sectors
+
+**Acceptance Criteria (100% Measurable)**
+- ✅ Latency: <5 minutes per sector analysis
+- ✅ Reliability: 95%+ successful score generation
+- ✅ Consistency: Ensemble models agree within 1 point 80%+ of time
+- ✅ Cost efficiency: <$5 inference cost per analysis
+
+### 📋 Phase 2: Chapter 7 Portfolio Construction (Weeks 3-4)
+
+**Package Structure (spec-driven)**
 ```
-sector-committee/examples/
-├── quickstart.py         # Basic sector committee usage
-├── weekly_rebalance.py   # Production-style workflow
-├── backtest_example.py   # Historical performance analysis
-└── custom_weights.py     # Pillar weight experimentation
+sector_committee/portfolio/
+├── __init__.py          # Exports: PortfolioConstructor, Portfolio
+├── constructor.py       # PortfolioConstructor implementation
+├── models.py            # Portfolio and RiskMetrics dataclasses
+├── mapping.py           # ScoreMapper score-to-tilt conversion
+├── hedging.py           # BetaHedger neutralization logic
+├── risk.py              # Risk management and constraint enforcement
+├── config.py            # ETF mappings and risk parameters
+└── utils.py             # Portfolio utilities and calculations
 ```
 
-**6. Jupyter Notebooks**
+**Core Deliverables**
+1. **D1**: PortfolioConstructor with build_portfolio method
+2. **D2**: ScoreMapper for {1,2,3,4,5} → {-2,-1,0,+1,+2} conversion
+3. **D3**: BetaHedger for market neutralization using inverse ETFs
+4. **D4**: Risk management with 30% concentration limits
+5. **D5**: ETF configuration for 11 SPDR sectors + inverses
+
+**Acceptance Criteria (100% Measurable)**
+- ✅ Beta control: |portfolio beta| < 0.1 for 100 random score combinations
+- ✅ Concentration: No sector >30% allocation
+- ✅ Performance: Full pipeline completion <30 seconds
+- ✅ Capital efficiency: Gross exposure = 100% ±2%
+
+### 📋 Testing Infrastructure (Both Phases)
+
+**Comprehensive Test Suites**
 ```
-sector-committee/notebooks/
-├── 00_quickstart.ipynb          # Getting started guide
-├── 01_agent_analysis.ipynb      # Individual agent deep dive
-├── 02_ensemble_comparison.ipynb # Multi-model validation
-├── 03_portfolio_construction.ipynb # Score-to-position workflow
-└── 04_risk_management.ipynb     # Hedging and controls
+tests/
+├── scoring/             # Phase 1 unit tests (90%+ coverage)
+├── portfolio/           # Phase 2 unit tests (95%+ coverage)
+├── integration/         # End-to-end workflow validation
+├── performance/         # Latency and cost verification
+└── compliance/          # Audit trail and risk validation
 ```
 
-### 📋 Advanced Features
-
-**1. Multi-Provider Support**
-- **Claude Integration**: Anthropic API client for ensemble diversification
-- **Gemini Integration**: Google AI research capabilities
-- **Grok Integration**: xAI analysis for alternative perspectives
-- **Provider Fallbacks**: Graceful degradation during outages
-
-**2. Enhanced Risk Management**
-- **Real-time Monitoring**: Position drift and correlation tracking
-- **Stress Testing**: Portfolio behavior under adverse scenarios
-- **Dynamic Hedging**: Adaptive beta adjustment based on market conditions
-- **Liquidity Management**: Position sizing based on ETF volume profiles
-
-**3. Performance Attribution**
-- **Model Contribution**: P&L attribution by individual agents
-- **Factor Analysis**: Return decomposition by fundamentals/sentiment/technicals
-- **Regime Analysis**: Performance across different market environments
-- **Cost Analysis**: Inference costs vs. alpha generation efficiency
+**Advanced Capabilities (Future Phases)**
+- Multi-provider support (Claude, Gemini, Grok)
+- Real-time monitoring and alerting
+- Performance attribution and factor analysis
+- Backtesting and historical validation framework
 
 ## Known Issues and Challenges
 
@@ -162,24 +170,51 @@ sector-committee/notebooks/
 - **Drawdown Control**: <5% maximum portfolio decline vs. benchmark
 - **Factor Neutrality**: <0.05 average exposure to unintended style factors
 
-## Next Milestones
+## Next Implementation Steps
 
-### 🎯 Phase 1: Core Package (Weeks 1-2)
-1. Implement sector_committee package structure
-2. Integrate deep_research_runner.py patterns
-3. Build portfolio construction pipeline
-4. Create basic test suite and examples
+### 🎯 Immediate Priority: Phase 1 Implementation (Chapter 6)
+**Timeline**: 2 weeks
+**Dependencies**: ✅ All prerequisites met (existing deep_research_runner.py, OpenAI API, specifications)
 
-### 🎯 Phase 2: Production Features (Weeks 3-4)
-1. Add comprehensive error handling and resilience
-2. Implement audit trail and compliance logging
-3. Build risk management and monitoring infrastructure
-4. Create demonstration notebooks and documentation
+**Week 1: Core Infrastructure**
+1. Create `sector_committee/scoring/` package structure
+2. Implement `SectorAgent` class adapting deep_research_runner patterns
+3. Build data models with strict JSON schema validation
+4. Develop ModelFactory and EnsembleAggregator components
 
-### 🎯 Phase 3: Advanced Capabilities (Weeks 5-6)
-1. Multi-provider ensemble expansion (Claude, Gemini, Grok)
-2. Dynamic risk management and adaptive hedging
-3. Performance attribution and cost optimization
-4. Full backtesting and validation framework
+**Week 2: Testing and Validation**
+1. Achieve 90%+ unit test coverage for all scoring modules
+2. Build integration tests for all 11 SPDR sectors
+3. Validate performance targets (<5 min latency, <$5 cost)
+4. Complete audit trail system for compliance
 
-The foundation is solid with the deep research implementation and comprehensive documentation. The focus now shifts to packaging this into a production-ready system that demonstrates the practical application of LLM agents in quantitative finance while maintaining institutional-grade risk management and operational discipline.
+### 🎯 Sequential Priority: Phase 2 Implementation (Chapter 7)
+**Timeline**: 2 weeks
+**Dependencies**: ⏳ Phase 1 completion (requires working sector scores)
+
+**Week 3: Portfolio Construction**
+1. Implement PortfolioConstructor with score-to-tilt mapping
+2. Build BetaHedger for market neutralization
+3. Create risk management framework with concentration limits
+4. Develop ETF configuration system
+
+**Week 4: Risk Management and Testing**
+1. Achieve 95%+ unit test coverage for portfolio modules
+2. Validate beta control (|beta| < 0.1) across 1000 test cases
+3. Complete end-to-end integration testing
+4. Document full workflow from scores to positions
+
+### 🎯 Success Gates (Spec-Driven Validation)
+**Phase 1 Gate**: All acceptance criteria met with automated test validation
+- 11 sectors analyzed with valid 1-5 scores
+- 95%+ reliability across 100 test analyses
+- Ensemble agreement within 1 point 80%+ of time
+- Complete audit trail for compliance review
+
+**Phase 2 Gate**: Portfolio construction fully operational
+- Beta neutralization within ±0.1 for all constructions
+- Zero concentration limit violations
+- Sub-30 second construction performance
+- Risk management constraints properly enforced
+
+The spec-driven approach ensures every deliverable is measurable and testable before implementation, providing clear success criteria and preventing scope creep throughout the development process.
