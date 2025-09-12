@@ -27,12 +27,42 @@ charting-the-future/
 │  ├─ marketing/                 # Book marketing collateral
 │  └─ styles/                    # Templates (Wiley-compliant)
 │
-├─ sector-committee/             # Capstone code: agents → scores → beta-neutral portfolio
+├─ sector-committee/             # Capstone: agents → scores → beta-neutral portfolio
 │  ├─ sector_committee/          # Installable Python package
-│  ├─ notebooks/                 # End-to-end walkthroughs
-│  ├─ configs/                   # Sector mappings, risk limits
-│  ├─ tests/                     # Unit tests for agents, tilts, hedging
-│  └─ examples/                  # Minimal scripts (weekly run, export orders)
+│  │  ├─ __init__.py
+│  │  ├─ data_models.py          # Core data structures and validation
+│  │  ├─ llm_models.py           # Model registry and factory patterns
+│  │  ├─ scoring/                # Phase 1: Deep research scoring system
+│  │  │  ├─ __init__.py
+│  │  │  ├─ agents.py            # SectorAgent implementation
+│  │  │  ├─ audit.py             # Compliance and audit trail logging
+│  │  │  ├─ ensemble.py          # Multi-model aggregation
+│  │  │  ├─ factory.py           # ModelFactory and adapter patterns
+│  │  │  ├─ llm_adapters.py      # LLM provider abstractions
+│  │  │  ├─ prompt_utilities.py  # Prompt formatting and utilities
+│  │  │  ├─ prompts.py           # Two-stage prompt system
+│  │  │  └─ schema.py            # JSON schema validation
+│  │  └─ portfolio/              # Phase 2: Portfolio construction pipeline
+│  │     ├─ __init__.py
+│  │     ├─ constructor.py       # PortfolioConstructor main interface
+│  │     ├─ models.py            # Portfolio, RiskMetrics, Signal dataclasses
+│  │     ├─ config.py            # ETF mappings and risk parameters
+│  │     └─ signals/             # Signal calibration and processing
+│  │        ├─ __init__.py
+│  │        └─ calibration.py    # Score-to-signal conversion system
+│  ├─ notebooks/                 # Educational materials and hands-on tutorials
+│  │  ├─ chapter_06.ipynb       # Chapter 6: From Words to Trades (comprehensive)
+│  │  └─ README.md               # Setup instructions (offline/live API modes)
+│  ├─ tests/                     # Multi-tier testing system (11.4x performance improvement)
+│  │  ├─ unit/                   # Ultra-fast unit tests (0.02s smoke tests)
+│  │  ├─ integration/            # Full API integration tests (3-6 min)
+│  │  └─ PERFORMANCE_COMPARISON.md # Testing strategy documentation
+│  ├─ configs/                   # Sector mappings, risk parameters
+│  ├─ examples/                  # Demonstration scripts and minimal examples
+│  ├─ logs/                      # Audit trail storage and compliance logs
+│  ├─ demo_deep_research.py      # Working demonstration script
+│  ├─ Makefile                   # Development automation (16 targets)
+│  └─ .env.example               # Environment configuration template
 │
 ├─ research/                     # Research papers referenced in the book
 │  ├─ sources.md                 # Master index: citation + URL
@@ -112,10 +142,35 @@ cd sector-committee
 uv pip install -e .
 ```
 
-### 4. Lint and test the code
+### 4. Development workflow with Makefile automation
 ```bash
-uv run ruff check .    # run linter on current directory
-uv run ruff format .   # format code
+cd sector-committee
+make help              # Show all available targets
+make test              # Run unit tests (fast)
+make test-all          # Run complete test suite  
+make coverage-html     # Generate coverage reports
+make lint-fix          # Auto-fix linting issues
+make format            # Format code
+```
+
+**Available Makefile targets:**
+```
+make clean           # Clean up cache and temporary files
+make coverage-all    # Run all tests with coverage report
+make coverage-html   # Generate and open HTML coverage report
+make coverage        # Run unit tests with coverage report
+make dev-install     # Install development dependencies
+make format          # Format code with ruff
+make help            # Show this help
+make install         # Install dependencies
+make lint-fix        # Run linting with ruff and auto-fix issues
+make lint            # Run linting with ruff
+make test-all        # Run all tests (unit + integration)
+make test-fast       # Run only fast tests (excluding slow markers)
+make test-integration # Run only integration tests
+make test-slow       # Run only slow/deep-research tests
+make test-unit       # Run only unit tests
+make test            # Run unit tests (fast)
 ```
 
 ## Testing Strategy - Multi-Tier Performance System
@@ -157,13 +212,14 @@ uv run pytest tests/test_phase1_integration.py -v  # 10 tests, API-dependent
 
 For detailed performance analysis and technical implementation, see [tests/PERFORMANCE_COMPARISON.md](sector-committee/tests/PERFORMANCE_COMPARISON.md).
 
-### 5. Run the capstone notebook
+### 5. Run the Chapter 6 educational notebook
 ```bash
-uv run jupyter notebook notebooks/00_quickstart.ipynb
+cd sector-committee
+uv run jupyter notebook notebooks/chapter_06.ipynb
 ```
 
-This walks through:  
-agents → sector scores (1–5) → committee aggregation → long/short portfolio → beta-hedge.
+This comprehensive tutorial walks through:  
+**Chapter 6: From Words to Trades** - Ideation → Signals → Execution covering the complete pipeline from LLM prompts to portfolio positions with interactive exercises and governance audit trails.
 
 ---
 

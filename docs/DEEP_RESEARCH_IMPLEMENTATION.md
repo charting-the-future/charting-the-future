@@ -28,9 +28,7 @@ This document details the implementation of the Deep Research API integration fo
 class ModelName(Enum):
     """Supported models for deep research analysis."""
     
-    OPENAI_O4_MINI_DEEP_RESEARCH = "gpt-4o-mini"  # Using standard gpt-4o-mini as placeholder
-    # Note: Deep research capabilities will be enabled through prompt engineering
-    # Note: Ensemble temporarily removed - using single model approach
+    OPENAI_O4_MINI_DEEP_RESEARCH = "4o-mini-deep-research"
 ```
 
 ### 2. Enhanced API Client Implementation
@@ -217,7 +215,7 @@ A comprehensive demonstration script that:
 
 ```python
 from sector_committee.scoring.factory import ModelFactory
-from sector_committee.scoring.models import SectorRequest
+from sector_committee.data_models import SectorRequest
 
 # Create client
 client = ModelFactory.create_default_client()
