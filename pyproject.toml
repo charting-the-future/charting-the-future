@@ -5,6 +5,12 @@ description = "Companion repository for *Charting the Future: Harnessing LLMs fo
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
 dependencies = [
+    "aiofiles>=24.1.0",
+    "aiohttp>=3.12.15",
+    "dotenv>=0.9.9",
+    "jsonschema>=4.25.1",
+    "openai>=1.50.0",
     "pytest>=8.4.2",
+    "pytest-asyncio>=0.24.0",
     "ruff>=0.12.12",
 ]

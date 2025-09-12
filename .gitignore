@@ -1,3 +1,10 @@
+# === Project Specific
+
+# Audit logs and runtime data
+logs/
+sector-committee/logs/
+
+
 # === Python
 
 # Byte-compiled / optimized / DLL files
